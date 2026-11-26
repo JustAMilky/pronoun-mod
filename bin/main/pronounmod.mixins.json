@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.milky.pronounmod.mixin",
+  "compatibilitylevel": "JAVA_21",
+  "refmap": "mixin.refmap.json",
+  "mixins": [
+    "PlayerListMixin",
+    "ClientboundPlayerInfoUpdatePacketAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
