@@ -22,7 +22,7 @@ public class PlayerListMixin {
         ServerGamePacketListenerImpl connection,
         Packet<?> packet
     ) {
-        PacketSender.handleSend(connection, packet, (PlayerList) (Object) this);
+        PacketSender.sendPlayerInfo(connection, packet, (PlayerList) (Object) this);
     }
 
     @Redirect(
@@ -36,6 +36,6 @@ public class PlayerListMixin {
         ServerGamePacketListenerImpl connection,
         Packet<?> packet
     ) {
-        PacketSender.handleSend(connection, packet, (PlayerList) (Object) this);
+        PacketSender.sendPlayerInfo(connection, packet, (PlayerList) (Object) this);
     }
 }

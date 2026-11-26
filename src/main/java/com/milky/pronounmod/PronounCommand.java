@@ -28,7 +28,7 @@ public class PronounCommand {
         var playerList = server.getPlayerList();
 
         for (ServerPlayer recipient : playerList.getPlayers()) {
-            PacketSender.handleSend(recipient.connection, packet, playerList);
+            PacketSender.sendPlayerInfo(recipient.connection, packet, playerList);
         }
     }
 
@@ -47,7 +47,7 @@ public class PronounCommand {
         var playerList = server.getPlayerList();
 
         for (ServerPlayer recipient : playerList.getPlayers()) {
-            PacketSender.handleSend(recipient.connection, packet, playerList);
+            PacketSender.sendPlayerInfo(recipient.connection, packet, playerList);
         }
     }
 

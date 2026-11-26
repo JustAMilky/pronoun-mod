@@ -17,7 +17,7 @@ public class PacketSender {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static void handleSend(
+    public static void sendPlayerInfo(
         ServerGamePacketListenerImpl connection,
         Packet<?> packet,
         PlayerList playerList
