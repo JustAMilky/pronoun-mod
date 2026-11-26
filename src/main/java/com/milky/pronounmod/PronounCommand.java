@@ -4,6 +4,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 public class PronounCommand {
@@ -41,6 +43,22 @@ public class PronounCommand {
                                 context.getSource().getServer()
                             ).setPronouns(player.getUUID(), newPronouns);
 
+                            ClientboundPlayerInfoUpdatePacket packet =
+                                new ClientboundPlayerInfoUpdatePacket(
+                                    ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME,
+                                    player
+                                );
+
+                            var playerList = context.getSource().getServer().getPlayerList();
+
+                            for (ServerPlayer recipient : playerList.getPlayers()) {
+                                PacketSender.handleSend(
+                                    recipient.connection,
+                                    packet,
+                                    playerList
+                                );
+                            }
+
                             context
                                 .getSource()
                                 .sendSuccess(
@@ -73,6 +91,22 @@ public class PronounCommand {
                                     ).withStyle(ChatFormatting.AQUA),
                                 false
                             );
+
+                        ClientboundPlayerInfoUpdatePacket packet =
+                            new ClientboundPlayerInfoUpdatePacket(
+                                ClientboundPlayerInfoUpdatePacket.Action.UPDATE_DISPLAY_NAME,
+                                player
+                            );
+
+                        var playerList = context.getSource().getServer().getPlayerList();
+
+                        for (ServerPlayer recipient : playerList.getPlayers()) {
+                            PacketSender.handleSend(
+                                recipient.connection,
+                                packet,
+                                playerList
+                            );
+                        }
 
                         return 1;
                     })
